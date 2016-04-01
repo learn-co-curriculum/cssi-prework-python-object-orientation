@@ -22,7 +22,7 @@ In Python, whenever we create a new instance (version) of something, we have bee
 
 ```Python
 >>>dog = "Rover"
->>>dog2 = "Snoopy"
+>>>dog2 = "Max"
 ```
 But we can add new level of meaning to our program by making a *user-defined* data type called a **class**. Using classes, we can build new objects that better represent the kinds of things in our program. Think of a class like a factory that produces different individual 'items' (which we'll call *instances*) based on a template or blueprint.
 
@@ -76,36 +76,40 @@ class Dog:
   def __init__(self, name, breed):
     self.name = name
     self.age = 0
-    self.species = breed
+    self.breed = breed
 ```
 
 To access or modify the attributes of an object, use dot notation.
 
 ```python
 >>>pet4 = Dog("Snoopy", "Labrador")
+>>>pet4.breed = "Beagle"
 ```
 
-When we changed `pet1`'s age, this didn't affect any of the other code. This is an example of encapsulation, which means that we can change as much as we want about an instance of an object, without changing the class that describes that object. The instructions for creating a class are encapsulated - hidden - from the actual objects themselves.
+When we changed `pet4`'s breed, this didn't affect any of the other code. This is an example of encapsulation, which means that we can change as much as we want about an instance of an object, without changing the class that describes that object. The instructions for creating a class are encapsulated - hidden - from the actual objects themselves.
+
+Try creating another attribute "size", and then instantiating a few new Dog objects with different size attributes.
 
 ## Methods
 
-An object's attributes are it's adjectives - the characteristics that define it, but we also want an object to act uniquely, an object's verbs are called methods.
-A method is exactly like a function, except a method can only be invoked on instances within that class. We have already used string methods, list methods and dictionary methods.
+An object's attributes are it's adjectives - the characteristics that define it. But many objects aren't static - they **do** things. We give objects "verbs" that we call **methods**.
+
+A method is exactly like a function, except that a method can only be invoked on instances within a class. We have already used string methods, list methods and dictionary methods.
 
 ```python
 >>>animal="cow"
->>>animal.upper()
+>>>animal.upper() #.upper() is a string method.
 'COW'
 >>>animals=["cow", "donkey", "llama"]
->>>animals.append("armadillo")
+>>>animals.append("armadillo") #.append() is a list method.
 >>>animals
 ['cow', 'donkey', 'llama', 'armadillo']
 >>>baby_names={'cow':'calf', 'donkey':'colt', 'llama':'cria', 'armadillo':'pup'}
->>> baby_names.keys()
+>>> baby_names.keys() #.keys() is a dictionary method.
 ['donkey', 'armadillo', 'llama', 'cow']
 
 ```
-Each method is specific to the object's class, we can use .keys() on a dictionary object, but not on a list object.
+Each method is specific to the object's class: We can use `.keys()` on a dictionary object, but not on a list object.
 
 Methods are functions, just within specific classes. As such, we can add methods to classes by using normal Python function syntax.
 
@@ -115,7 +119,7 @@ class Dog:
     self.name = name
     self.age = 0
   def bark(self):
-    print "Woof!"  
+    print "Woof!"
 ```
 
 ```python
@@ -130,10 +134,12 @@ class Dog:
   def __init__(self, name):
     self.name = name
     self.age = 0
+  
   def bark(self):
     print "Woof!"
+
   def get_older(self,years):
-    self.age=self.age + years  
+    self.age=self.age + years
 ```
 
 ```python
@@ -153,7 +159,7 @@ Before, when we wanted to create a value that represented a dog, we were limited
 
 ## Facebook Example
 
-Before you practice using classes to create objects. Take a look at one more example of how one could start to represent a Facebook profile using classes.
+Before you practice using classes to create objects. We all know that a facebook profile has a few basic characteristics (name, number of likes, friends) and actions (like, accept a request, send a message). Take a look at this example of how we could start to represent a Facebook profile using classes. 
 
 ```python
 class Profile:
@@ -161,10 +167,13 @@ class Profile:
     self.profile_title = name
     self.likes = 0
     self.friends = {}
-  def accept_friend_request(self, friend, friend_url):  
+
+  def accept_friend_request(self, friend, friend_url):
       self.friends[friend]= friend_url
+
   def like(self):
       self.likes += 1
+
   def send_message(self, friend, message):
        print "\"{}\" will be posted to the following url:{}".format(message,self.friends[friend])
 ```
@@ -173,12 +182,15 @@ When a new profile is created, it gets three attributes assigned to it, the prof
 When the like method is called, the profile's likes increases by one:
 ```python
 >>> tom_profile=Profile("Tom Haverford")
+>>> tom_profile.likes
+0
 >>> tom_profile.like()
 >>> tom_profile.likes
 1
 ```
 
 When friend requests are accepted, those friends are added to a friends dictionary:
+
 ```python
 >>> tom_profile.accept_friend_request("Jean-Ralphio Saperstein", "facebook.com/CAASHizle")
 >>> tom_profile.accept_friend_request("Leslie Knope", "facebook.com/futureMRSBiden")
