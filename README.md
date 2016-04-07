@@ -3,11 +3,11 @@
 Developers have different design choices when structuring their code. **Object Orientated Programming** is a common way to organize, manipulate and store data in an application.
 
 ## Objectives
-1. Understand and Explain the purpose of classes
+1. Explain the purpose of classes
 2. Create a new Python Class
 3. Initialize instances of a Pythong class
-3. Add Class attributes
-4. Add Class methods
+3. Add class attributes
+4. Add class methods
 
 ## Introduction
 
